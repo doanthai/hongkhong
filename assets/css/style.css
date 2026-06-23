@@ -186,6 +186,15 @@ a:hover { color: #fff; }
   color: #fff;
   flex-shrink: 0;
 }
+.nav-logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: #12121f;
+  padding: 3px;
+}
 .nav-links {
   display: flex;
   align-items: center;
