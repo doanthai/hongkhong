@@ -4,6 +4,7 @@ Professional company website for **BBL Technology Limited** (Hong Kong), a mobil
 
 - **Domain:** [bblvn.store](https://bblvn.store)
 - **Email:** contact@bblvn.store
+- **Phone:** +84 986 747 413
 - **Address:** Suite C, Level 7, World Trust Tower, 50 Stanley Street, Central, Hong Kong
 
 ---
