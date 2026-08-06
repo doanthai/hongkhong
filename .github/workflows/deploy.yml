@@ -1,9 +1,10 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
+  # Only manual + explicit legal sync trigger — avoid storm on every Contents API file commit
   workflow_dispatch:
+  repository_dispatch:
+    types: [af-legal-synced]
 
 permissions:
   contents: read
@@ -12,13 +13,13 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -30,3 +31,6 @@ jobs:
           path: '.'
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # fail in 3 minutes instead of 10 if still queued
+          timeout: 180000
