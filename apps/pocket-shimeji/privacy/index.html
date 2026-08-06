@@ -16,13 +16,12 @@ h1{font-size:1.6rem;margin:.2rem 0 .3rem}
 nav.crumbs{font-size:.85rem;margin-bottom:1.5rem}
 nav.crumbs a{color:#4338ca;text-decoration:none}
 h2{font-size:1.15rem;margin-top:2rem;border-top:1px solid #e5e7eb;padding-top:1.25rem}
-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem;overflow-x:auto;display:block}
+h3{font-size:1rem;margin-top:1.25rem}
+table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem}
 th,td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid #e5e7eb;vertical-align:top}
 th{color:#374151;font-weight:600}
 a{color:#4338ca}
-.callout{background:#fff7ed;border:1px solid #fed7aa;border-radius:.6rem;padding:.9rem 1rem;font-size:.88rem;margin:1.5rem 0;color:#7c2d12}
 footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e5e7eb;font-size:.85rem;color:#6b7280}
-footer a{color:#4338ca}
 ul{padding-left:1.3rem}
 @media (prefers-color-scheme:dark){
   body{background:#111114;color:#e5e7eb}
@@ -32,9 +31,7 @@ ul{padding-left:1.3rem}
   th,td{border-color:#2a2a2e}
   th{color:#d1d5db}
   a{color:#a5b4fc}
-  .callout{background:#3a2412;border-color:#7c4a12;color:#fed7aa}
   footer{border-color:#2a2a2e;color:#9ca3af}
-  footer a{color:#a5b4fc}
 }
 </style>
 </head>
@@ -43,98 +40,82 @@ ul{padding-left:1.3rem}
   <nav class="crumbs"><a href="../">Pocket Shimeji — Legal</a> / Privacy Policy</nav>
   <span class="badge">Privacy Policy</span>
   <h1>Pocket Shimeji: Screen Pet</h1>
-  <p class="meta">Effective date: August 3, 2026 · Developer: BBL TECHNOLOGY LTD</p>
+  <p class="meta">Effective date: August 6, 2026 · Developer: BBL TECHNOLOGY LTD</p>
 
   <p>This Privacy Policy explains how Pocket Shimeji: Screen Pet ("Pocket Shimeji," "the App," "we," "us")
-  handles information when you use the app.</p>
+  handles information when you use the app. Pocket Shimeji is developed by BBL TECHNOLOGY LTD.</p>
 
-  <div class="callout"><strong>Short version:</strong> Pocket Shimeji does not have an account system, does not
-  use ads, does not use analytics or crash-reporting SDKs, and does not send your data to a server. Everything
-  the app remembers about you — your pet collection, streak, settings, and any pet you draw or customize —
-  stays stored on your device only.</div>
-
-  <h2>1. Information we do — and do not — collect</h2>
-  <p>We do not operate a backend server for this app, and the app does not currently make any network requests.
-  The app does not collect, transmit, sell, or share any personal information with us or with any third party.</p>
-  <p>Specifically, the app does <strong>not</strong>:</p>
-  <ul>
-    <li>ask you to create an account, sign in, or provide your name, email, or any identifying information</li>
-    <li>collect location, contacts, phone, camera, or microphone data (the app never requests these permissions)</li>
-    <li>include any advertising SDK</li>
-    <li>include any analytics or crash-reporting SDK</li>
-    <li>transmit your custom pet drawings/imported images anywhere</li>
-  </ul>
+  <h2>1. Information we process</h2>
+  <p>Pocket Shimeji does <strong>not</strong> require you to create an account or provide your name, email, or
+  other profile identifiers to us. Gameplay and preference data you create in the app (pets, streak, settings,
+  custom drawings) is stored in the app’s private storage on your device.</p>
+  <p>Separately, the App uses <strong>Google services that are standard in our Android builds</strong> —
+  including <strong>Google Mobile Ads (AdMob)</strong> and <strong>Firebase</strong> (Analytics, Crashlytics,
+  and where configured Remote Config). Those services may process device and advertising identifiers,
+  diagnostics, and similar technical data as described in Google’s policies, so that we can show ads, measure
+  stability, and configure the product. We do not sell your personal information.</p>
+  <p>We do not ask for location, contacts, phone, camera, or microphone permissions for Pocket Shimeji’s core
+  pet features. Custom-pet images you pick are handled on-device (system Photo Picker + local crop) and are not
+  uploaded to BBL TECHNOLOGY LTD servers as pet artwork.</p>
 
   <h2>2. Information stored locally on your device</h2>
-  <p>To provide its core features, Pocket Shimeji stores the following <strong>only on your device</strong>,
-  using Android's private app storage:</p>
   <ul>
-    <li>Your app settings (pet animation speed, pet size, notification toggle, and similar preferences)</li>
-    <li>Your score and daily streak count</li>
+    <li>App settings (pet animation speed, pet size, notification toggle, and similar preferences)</li>
+    <li>Score and daily streak count</li>
     <li>Which pets in the catalog you have unlocked</li>
-    <li>Any custom pet you create — including the image you pick to draw or trace a skin, and the resulting pet
-    frames</li>
+    <li>Custom pets you create (including imported/cropped images and resulting frames)</li>
   </ul>
-  <p>This data never leaves your device. We cannot see it, and it is not backed up to any BBL TECHNOLOGY LTD server.
-  If you uninstall the app, or clear its storage from Android Settings, this data is permanently deleted.</p>
+  <p>This <strong>local</strong> gameplay data is not copied to a BBL TECHNOLOGY LTD account backend. Uninstalling
+  the app or clearing its storage removes that on-device data. Clearing storage does not by itself erase data that
+  Google’s ad or analytics SDKs may retain under their own retention rules.</p>
 
   <h2>3. Permissions the app requests, and why</h2>
   <table>
     <tr><th>Permission</th><th>Why the app asks for it</th></tr>
-    <tr><td>Display over other apps</td><td>This is the core feature of Pocket Shimeji: it lets your pet walk,
-    climb, and sit on top of your screen while you use other apps. Without this permission, the pet cannot
-    appear outside the Pocket Shimeji app itself.</td></tr>
-    <tr><td>Run in the foreground / "special use" foreground service</td><td>Keeps the pet-overlay service alive
-    in the background so your pet keeps moving around your screen instead of disappearing the moment you switch
-    apps.</td></tr>
-    <tr><td>Notifications</td><td>Used for (a) a persistent notification while your pet overlay is active, and
-    (b) an optional daily reminder about your streak. You can decline this — the pet and the rest of the app
-    still work, you simply won't get the reminder or persistent notice.</td></tr>
-    <tr><td>Receive boot completed</td><td>Lets the app automatically bring your pet back after you restart your
-    phone, if the pet overlay was turned on before the restart.</td></tr>
-    <tr><td>Internet</td><td>Reserved for a possible future feature (downloading additional pet characters). As
-    of this version, the app makes no network calls at all — this permission is currently unused. If that
-    changes in a future update, we will update this Privacy Policy first.</td></tr>
+    <tr><td>Display over other apps</td><td>Core feature: pet overlay on top of other apps.</td></tr>
+    <tr><td>Foreground / special-use service</td><td>Keeps the pet overlay alive when you switch apps.</td></tr>
+    <tr><td>Notifications</td><td>Overlay notice and optional streak reminder (optional permission).</td></tr>
+    <tr><td>Receive boot completed</td><td>Restores the pet after reboot if overlay was on.</td></tr>
+    <tr><td>Internet</td><td>Network features of the product stack (content/CDN where enabled, ads, Firebase).</td></tr>
   </table>
-  <p>We never ask for storage/photos permission directly: when you choose a photo to draw or crop a custom pet,
-  the app opens the standard Android system Photo Picker, which lets you pick one image without granting the app
-  broader access to your photo library. That image is cropped and processed entirely on your device and is never
-  uploaded anywhere.</p>
 
   <h2>4. Third-party services</h2>
-  <p>The only third-party software component bundled with the app is <strong>uCrop</strong>, an open-source,
-  on-device image cropping library used solely when you choose to import a photo for a custom pet. It performs
-  its work locally on your device and does not communicate with any server. We do not integrate any advertising
-  network, analytics platform, or crash-reporting service in this app.</p>
+  <h3>Google Mobile Ads (AdMob)</h3>
+  <p>The App is built to use Google Mobile Ads to show advertisements. Google may collect or receive information
+  such as advertising ID, device and app information, and interaction data. See
+  <a href="https://policies.google.com/technologies/ads">Google’s advertising policies</a> and this app’s Play
+  Data safety form.</p>
+  <h3>Firebase (Google)</h3>
+  <p>The App includes Firebase components typical of our releases — including Analytics, Crashlytics, and (where
+  configured) Remote Config — under
+  <a href="https://firebase.google.com/support/privacy">Google’s Firebase privacy terms</a>.</p>
+  <h3>Other libraries</h3>
+  <p><strong>uCrop</strong> is used only for on-device image cropping when you import a photo for a custom pet.</p>
 
   <h2>5. Children's privacy</h2>
-  <p>Pocket Shimeji is a general-audience app and is not directed at children. We do not knowingly collect
-  personal information from anyone, including children, because the app does not collect personal information
-  from any user.</p>
+  <p>Pocket Shimeji is a general-audience app and is not directed at children. Parents who have concerns can
+  remove on-device app data (Section 6) and review Google’s ad/personalization settings on the device.</p>
 
   <h2>6. Data deletion</h2>
-  <p>Because nothing is stored on our servers, there is no "delete my account" request to make — there is no
-  account. See our <a href="../delete-account/">Data Deletion page</a> for step-by-step instructions to remove
-  data from your device.</p>
+  <p>There is no BBL TECHNOLOGY LTD user account to delete. Remove a custom pet in Collection, or clear app
+  storage / uninstall via Android Settings. See our <a href="../delete-account/">Data Deletion page</a>. For
+  advertising or analytics data held by Google, use Google’s device/account controls as well.</p>
 
   <h2>7. Security</h2>
-  <p>Your data is protected by Android's standard per-app sandboxing, which keeps other apps from reading Pocket
-  Shimeji's private storage. Since no data is transmitted off your device, there is no server-side transmission
-  to secure.</p>
+  <p>On-device data is protected by Android’s per-app sandbox. Data processed by Google ads and Firebase is
+  handled under Google’s practices for those products.</p>
 
   <h2>8. Changes to this policy</h2>
-  <p>If we change what the app collects or how it behaves, we will update this page and change the effective
-  date above. Continued use of the app after an update means you accept the revised policy.</p>
+  <p>If we change what the app collects or how third-party SDKs are used, we will update this page and the
+  effective date. Continued use after an update means you accept the revised policy.</p>
 
   <h2>9. Contact us</h2>
-  <p>Questions about this Privacy Policy or your data: <a href="mailto:contact@bblvn.store">contact@bblvn.store</a></p>
+  <p>Questions: <a href="mailto:contact@bblvn.store">contact@bblvn.store</a></p>
 
   <footer>
-    <p>Pocket Shimeji: Screen Pet — <a href="../">Legal &amp; Policy home</a> ·
-    <a href="../terms/">Terms of Use</a> · <a href="../delete-account/">Data Deletion</a> ·
+    <p>Pocket Shimeji: Screen Pet — <a href="../">Legal home</a> ·
+    <a href="../terms/">Terms</a> · <a href="../delete-account/">Data Deletion</a> ·
     <a href="../support/">Support</a></p>
-    <p>This page is an AI-generated draft prepared for App Store Optimization / legal review before submission
-    to Google Play. Verify contact details and effective date before treating it as final.</p>
   </footer>
 </div>
 </body>
