@@ -1,41 +1,37 @@
-name: Deploy to GitHub Pages
+name: Validate store site
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:   # Allow manual trigger from GitHub UI
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
-# Allow only one concurrent deployment
 concurrency:
-  group: pages
+  group: pages-validate
   cancel-in-progress: true
 
+# GitHub Pages serves from branch main (legacy). Do NOT use
+# actions/deploy-pages — multi-file Contents API syncs create many
+# deployments that stick at deployment_queued.
+
 jobs:
-  deploy:
-    name: Deploy
+  validate:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
+    timeout-minutes: 5
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'   # Deploy entire repo root
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/checkout@v4
+      - name: Require .nojekyll
+        run: test -f .nojekyll || (echo "missing .nojekyll" && exit 1)
+      - name: HTML pages under apps/ must have index.html
+        run: |
+          set -euo pipefail
+          if [ ! -d apps ]; then
+            echo "chưa có apps/ — OK lần bootstrap trống"
+            exit 0
+          fi
+          find apps -type d -mindepth 2 -maxdepth 2 | while read -r d; do
+            test -f "$d/index.html" || { echo "thiếu $d/index.html"; exit 1; }
+          done
+          echo "validate OK"
