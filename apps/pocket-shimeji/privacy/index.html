@@ -48,15 +48,23 @@ ul{padding-left:1.3rem}
   <h2>1. Information we process</h2>
   <p>Pocket Shimeji does <strong>not</strong> require you to create an account or provide your name, email, or
   other profile identifiers to us. Gameplay and preference data you create in the app (pets, streak, settings,
-  custom drawings) is stored in the app’s private storage on your device.</p>
+  custom drawings, emoji/battery overlay preferences) is stored in the app’s private storage on your device.</p>
   <p>Separately, the App uses <strong>Google services that are standard in our Android builds</strong> —
   including <strong>Google Mobile Ads (AdMob)</strong> and <strong>Firebase</strong> (Analytics, Crashlytics,
-  and where configured Remote Config). Those services may process device and advertising identifiers,
-  diagnostics, and similar technical data as described in Google’s policies, so that we can show ads, measure
-  stability, and configure the product. We do not sell your personal information.</p>
+  and Remote Config). Those services may process device and advertising identifiers, diagnostics, and similar
+  technical data as described in Google’s policies, so that we can show ads, measure stability, and configure
+  the product. We do not sell your personal information.</p>
+  <p>The App also offers optional <strong>in-app purchases</strong> (for example Premium unlocks) processed by
+  <strong>Google Play Billing</strong>. Payment card details are handled by Google; we do not receive your full
+  payment card information. Purchase or entitlement status may be stored on your device and verified with Google Play.</p>
+  <p>The App may download pet catalog assets and emoji/battery themes from a <strong>third-party content delivery
+  network (CDN)</strong> operated for the App. CDN requests may include standard technical data (such as IP address
+  and device/user-agent) needed to deliver files. We do not upload your custom pet artwork to that CDN.</p>
   <p>We do not ask for location, contacts, phone, camera, or microphone permissions for Pocket Shimeji’s core
   pet features. Custom-pet images you pick are handled on-device (system Photo Picker + local crop) and are not
   uploaded to BBL TECHNOLOGY LTD servers as pet artwork.</p>
+  <p>If you contact us by email (for example from the in-app feedback link), we receive the address and message
+  content you choose to send.</p>
 
   <h2>2. Information stored locally on your device</h2>
   <ul>
@@ -64,10 +72,12 @@ ul{padding-left:1.3rem}
     <li>Score and daily streak count</li>
     <li>Which pets in the catalog you have unlocked</li>
     <li>Custom pets you create (including imported/cropped images and resulting frames)</li>
+    <li>Emoji / status-bar battery overlay preferences (when you use that feature)</li>
+    <li>Optional purchase / Premium entitlement flags after a successful Play purchase</li>
   </ul>
   <p>This <strong>local</strong> gameplay data is not copied to a BBL TECHNOLOGY LTD account backend. Uninstalling
   the app or clearing its storage removes that on-device data. Clearing storage does not by itself erase data that
-  Google’s ad or analytics SDKs may retain under their own retention rules.</p>
+  Google’s ad, analytics, or Play Billing systems may retain under their own retention rules.</p>
 
   <h2>3. Permissions the app requests, and why</h2>
   <table>
@@ -76,8 +86,11 @@ ul{padding-left:1.3rem}
     <tr><td>Foreground / special-use service</td><td>Keeps the pet overlay alive when you switch apps.</td></tr>
     <tr><td>Notifications</td><td>Overlay notice and optional streak reminder (optional permission).</td></tr>
     <tr><td>Receive boot completed</td><td>Restores the pet after reboot if overlay was on.</td></tr>
-    <tr><td>Internet</td><td>Network features of the product stack (content/CDN where enabled, ads, Firebase).</td></tr>
+    <tr><td>Accessibility service (optional)</td><td>Used only to position and display a custom emoji/battery and status-bar decoration overlay. It does not read messages, passwords, or notification contents, and does not collect personal data for BBL TECHNOLOGY LTD. You can turn it off in Android Settings.</td></tr>
+    <tr><td>Internet / network state</td><td>Downloads catalog and theme assets via CDN where enabled, serves ads, talks to Firebase, and completes Play Billing flows.</td></tr>
   </table>
+  <p>When you choose a photo for a custom pet, the app uses the Android system Photo Picker and an on-device crop
+  library (uCrop). That image stays on your device unless you delete it or clear app storage.</p>
 
   <h2>4. Third-party services</h2>
   <h3>Google Mobile Ads (AdMob)</h3>
@@ -86,24 +99,34 @@ ul{padding-left:1.3rem}
   <a href="https://policies.google.com/technologies/ads">Google’s advertising policies</a> and this app’s Play
   Data safety form.</p>
   <h3>Firebase (Google)</h3>
-  <p>The App includes Firebase components typical of our releases — including Analytics, Crashlytics, and (where
-  configured) Remote Config — under
-  <a href="https://firebase.google.com/support/privacy">Google’s Firebase privacy terms</a>.</p>
+  <p>The App includes Firebase components typical of our releases — including Analytics, Crashlytics, and Remote
+  Config — under
+  <a href="https://firebase.google.com/support/privacy">Google’s Firebase privacy terms</a>. Remote Config may
+  update product UI such as home layout and catalog tabs.</p>
+  <h3>Google Play Billing</h3>
+  <p>Optional paid features are sold through Google Play. Google processes the transaction. See
+  <a href="https://play.google.com/about/play-terms/">Google Play Terms of Service</a>. We may receive purchase
+  tokens / entitlement status needed to unlock Premium features in the App.</p>
+  <h3>Content delivery network (CDN)</h3>
+  <p>Pet catalog files and emoji/battery theme assets may be fetched from a third-party CDN used to host App
+  content. The CDN provider processes standard request metadata to deliver those files. Custom drawings and photos
+  you import for pets stay on your device and are not uploaded to the CDN as user artwork.</p>
   <h3>Other libraries</h3>
   <p><strong>uCrop</strong> is used only for on-device image cropping when you import a photo for a custom pet.</p>
 
   <h2>5. Children's privacy</h2>
   <p>Pocket Shimeji is a general-audience app and is not directed at children. Parents who have concerns can
-  remove on-device app data (Section 6) and review Google’s ad/personalization settings on the device.</p>
+  remove on-device app data (Section 6) and review Google’s ad/personalization and purchase settings on the device.</p>
 
   <h2>6. Data deletion</h2>
   <p>There is no BBL TECHNOLOGY LTD user account to delete. Remove a custom pet in Collection, or clear app
-  storage / uninstall via Android Settings. See our <a href="../delete-account/">Data Deletion page</a>. For
-  advertising or analytics data held by Google, use Google’s device/account controls as well.</p>
+  storage / uninstall via Android Settings. Purchases managed by Google Play follow Google’s account and refund
+  tools. See our <a href="../delete-account/">Data Deletion page</a>. For advertising, analytics, or purchase data
+  held by Google, use Google’s device/account controls as well.</p>
 
   <h2>7. Security</h2>
-  <p>On-device data is protected by Android’s per-app sandbox. Data processed by Google ads and Firebase is
-  handled under Google’s practices for those products.</p>
+  <p>On-device data is protected by Android’s per-app sandbox. Data processed by Google ads, Firebase, Play Billing,
+  and the CDN is handled under those providers’ practices.</p>
 
   <h2>8. Changes to this policy</h2>
   <p>If we change what the app collects or how third-party SDKs are used, we will update this page and the
