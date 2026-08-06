@@ -1,36 +1,33 @@
-name: Deploy to GitHub Pages
+name: Validate store site
 
 on:
-  # Only manual + explicit legal sync trigger — avoid storm on every Contents API file commit
+  push:
+    branches: [main]
   workflow_dispatch:
-  repository_dispatch:
-    types: [af-legal-synced]
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-validate
+  cancel-in-progress: true
+
+# Pages = legacy (branch main). Do NOT use actions/deploy-pages:
+# multi-file Contents API syncs leave deployments stuck at deployment_queued
+# and block all later deploys ("cancel <sha> first").
 
 jobs:
-  deploy:
-    name: Deploy
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
-      - id: deployment
-        uses: actions/deploy-pages@v4
-        with:
-          # fail in 3 minutes instead of 10 if still queued
-          timeout: 180000
+      - name: Require .nojekyll
+        run: test -f .nojekyll || (echo "missing .nojekyll" && exit 1)
+      - name: apps/*/page/index.html
+        run: |
+          set -euo pipefail
+          [ -d apps ] || exit 0
+          find apps -type d -mindepth 2 -maxdepth 2 | while read -r d; do
+            test -f "$d/index.html" || { echo "thiếu $d/index.html"; exit 1; }
+          done
