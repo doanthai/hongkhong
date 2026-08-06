@@ -1,4 +1,4 @@
-name: Validate store site
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -7,31 +7,26 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: pages-validate
+  group: pages
   cancel-in-progress: true
 
-# GitHub Pages serves from branch main (legacy). Do NOT use
-# actions/deploy-pages — multi-file Contents API syncs create many
-# deployments that stick at deployment_queued.
-
 jobs:
-  validate:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 12
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Require .nojekyll
-        run: test -f .nojekyll || (echo "missing .nojekyll" && exit 1)
-      - name: HTML pages under apps/ must have index.html
-        run: |
-          set -euo pipefail
-          if [ ! -d apps ]; then
-            echo "chưa có apps/ — OK lần bootstrap trống"
-            exit 0
-          fi
-          find apps -type d -mindepth 2 -maxdepth 2 | while read -r d; do
-            test -f "$d/index.html" || { echo "thiếu $d/index.html"; exit 1; }
-          done
-          echo "validate OK"
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - id: deployment
+        uses: actions/deploy-pages@v4
