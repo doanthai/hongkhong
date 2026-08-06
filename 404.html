@@ -4,16 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BBL Technology Limited</title>
-  <!-- GitHub Pages SPA redirect: send all unknown paths back to index with hash -->
+  <!-- SPA fallback for marketing site only. Never loop under /apps/ (static legal pages). -->
   <script>
-    var seg = window.location.pathname.replace(/^\/[^/]*\//, '/');
-    var q = window.location.search.slice(1);
-    window.location.replace(
-      window.location.origin +
-      window.location.pathname.split('/').slice(0, -1).join('/') + '/' +
-      '?p=' + encodeURIComponent(seg) + (q ? '&q=' + encodeURIComponent(q) : '') +
-      window.location.hash
-    );
+    (function () {
+      var path = window.location.pathname || '/';
+      var search = window.location.search || '';
+      // Static legal tree — do not rewrite
+      if (path === '/apps' || path.indexOf('/apps/') === 0) {
+        document.write('<p style="font:16px/1.5 system-ui;margin:2rem">Page not found. <a href="/apps/">App legal pages</a> · <a href="/">Home</a></p>');
+        return;
+      }
+      // Already redirected once (?p=) — stop infinite encode loop, go home
+      if (/[?&]p=/.test(search)) {
+        window.location.replace(window.location.origin + '/');
+        return;
+      }
+      var seg = path.replace(/^\/[^/]*\//, '/');
+      var q = search.slice(1);
+      window.location.replace(
+        window.location.origin +
+        path.split('/').slice(0, -1).join('/') + '/' +
+        '?p=' + encodeURIComponent(seg) + (q ? '&q=' + encodeURIComponent(q) : '') +
+        window.location.hash
+      );
+    })();
   </script>
 </head>
 <body></body>
