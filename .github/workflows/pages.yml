@@ -1,33 +1,38 @@
-name: Validate store site
+name: store-site-validate
+
+# Validate-only — KHÔNG deploy Pages.
+# Store site dùng Settings → Pages → Deploy from a branch (legacy).
+# AF sync = 1 git commit; GitHub tự rebuild Pages từ branch.
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
+  repository_dispatch:
+    types: [af-legal-synced]
 
 permissions:
   contents: read
 
 concurrency:
-  group: pages-validate
+  group: store-site-validate
   cancel-in-progress: true
-
-# Pages = legacy (branch main). Do NOT use actions/deploy-pages:
-# multi-file Contents API syncs leave deployments stuck at deployment_queued
-# and block all later deploys ("cancel <sha> first").
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - name: Require .nojekyll
         run: test -f .nojekyll || (echo "missing .nojekyll" && exit 1)
-      - name: apps/*/page/index.html
+      - name: HTML pages under apps/ must have index.html
         run: |
           set -euo pipefail
-          [ -d apps ] || exit 0
+          if [ ! -d apps ]; then
+            echo "chưa có apps/ — OK lần bootstrap trống"
+            exit 0
+          fi
           find apps -type d -mindepth 2 -maxdepth 2 | while read -r d; do
             test -f "$d/index.html" || { echo "thiếu $d/index.html"; exit 1; }
           done
+          echo "validate OK"
